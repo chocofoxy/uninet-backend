@@ -12,8 +12,15 @@ export class HomeController {
         return await this.homeService.geTimeline(id)
     }
 
-    @Post('/:id/post')
-    async post(@Param("id") id , @Body('content') content ) {
-        return await this.homeService.PostToTimeline(id , await this.postService.create(null,content))
+    //Admin Guard
+    @Post('/admin/post')
+    async adminPost(@Param("id") id , @Body('content') content ) {
+        return await this.homeService.PostToTimeline(1 , await this.postService.create(null,content))
     }
+
+    @Post('/general/post')
+    async GenralPost(@Param("id") id , @Body('content') content ) {
+        return await this.homeService.PostToTimeline(2 , await this.postService.create(null,content))
+    }
+
 }

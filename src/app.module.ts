@@ -13,6 +13,7 @@ import { HomeModule } from './home/home.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { PostModule } from './post/post.module';
 import { ProfileModule } from './profile/profile.module';
+import { CommentModule } from './comment/comment.module';
 
 
 @Module({
@@ -40,6 +41,7 @@ import { ProfileModule } from './profile/profile.module';
       entities: ["dist/**/*.entity{.ts,.js}"],
       synchronize: true,
     }),
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

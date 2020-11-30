@@ -40,9 +40,12 @@ export class User {
     @ManyToOne(type => Rang , rang => rang.students )
     rang: Rang ;
 
-    constructor( email , password ) {
+    constructor( firstname , lastname , password , cin , email ) {
+        this.firstname = firstname
+        this.lastname = lastname
         this.email = email
         this.password = password
+        this.cin = cin
     }
 
 }

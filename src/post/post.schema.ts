@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 
 @Schema()
@@ -12,6 +12,9 @@ export class Post extends Document {
 
   @Prop({ default: null })
   media: string;
+
+  @Prop({ type: [{ type: Types.ObjectId, ref: Comment.name }] })
+  comments: Comment[];
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);

@@ -21,10 +21,13 @@ export class AuthController {
 
   @Post('/new')
   signin(
-    @Body('username') username: string,
+    @Body('firstname') firstname: string,
+    @Body('lastname') lastname: string,
     @Body('password') password: string,
+    @Body('cin') cin: string,
+    @Body('email') email: string,
   ): void {
-    let user = new User(username, password);
+    let user = new User(firstname , lastname, password , cin , email );
     this.userService.save(user);
   }
 
