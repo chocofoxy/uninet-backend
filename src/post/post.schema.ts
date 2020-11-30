@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Comment } from '../comment/comment.schema'
 import { Document, Types } from 'mongoose';
 
 
