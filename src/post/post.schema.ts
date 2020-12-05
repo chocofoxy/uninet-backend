@@ -16,6 +16,9 @@ export class Post extends Document {
 
   @Prop({ type: [{ type: Types.ObjectId, ref: Comment.name }] })
   comments: Comment[];
+
+  @Prop({ type: Date, required: true })
+  time: Date;
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);
