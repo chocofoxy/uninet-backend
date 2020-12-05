@@ -33,9 +33,11 @@ export class UserService {
         return this.usersRepository.find({ where: { valid: false } , relations: [] });
     }
 
-    async activate(id): Promise<User> {
+    async activate(id,role,department): Promise<User> {
         let user = await this.findOne(id);
         user.valid = true ;
+        user.department = department ;
+        user.role = role ;
         user.profile = await this.profileService.create()
         return this.save(user)
     }

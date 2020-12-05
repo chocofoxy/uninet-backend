@@ -22,5 +22,11 @@ export class PostService {
         post.text = text 
         return await post.save()
     }
-
+/*
+    async comment(id, comment ) {
+        const post = await this.PostModel.findById(id)
+        post.text = text 
+        return await post.save()
+    }
+*/
 }

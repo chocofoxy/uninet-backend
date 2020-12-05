@@ -25,11 +25,14 @@ export class User {
     @Column()
     password: string;
 
-    @Column({ default: false})
+    @Column({ default: false })
     valid: boolean;
 
-    /*@Column({ type: 'text', array: true })
-    role: Role;*/
+    @Column({ default: '-' })
+    role: string;
+
+    @Column({ default: '-' })
+    department: string;
 
     @OneToOne(type => Profile , profile => profile.user )
     profile: Profile ;

@@ -28,8 +28,8 @@ export class UserController {
     }
 
     @Post('/:id/activate')
-    async activate( @Param('id') id , ) {
-        await this.userService.activate(id) ;
+    async activate( @Param('id') id , @Body('role') role , @Body('department') department ) {
+        await this.userService.activate(id,role,department) ;
     }
 
     @Get('/pending')
