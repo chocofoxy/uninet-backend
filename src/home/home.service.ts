@@ -17,7 +17,7 @@ export class HomeService {
       }
 
     async initTimelines() {
-        await this.homeModel.collection.drop();
+        //this.homeModel.collection.drop();
         const generalTimeline = new this.homeModel();
         const adminTimeline = new this.homeModel();
         generalTimeline.uid = 1;
@@ -29,7 +29,7 @@ export class HomeService {
     }
 
     async geTimeline(id: number) {
-        return await this.homeModel.findOne({ uid: id }).populate({ 
+        let timeline = await this.homeModel.findOne({ uid: id }).populate({ 
             path: 'feed',
             model: 'Feed',
             populate: {
@@ -37,10 +37,11 @@ export class HomeService {
                 model: 'Post'
             }
         })
+        return timeline
     }
 
     async PostToTimeline(id , post) {
-        const timeline = await this.geTimeline(id)
+        const timeline = await this.geTimeline(id)       
         await this.feedService.addPost(timeline.feed._id,post)
     }
 }

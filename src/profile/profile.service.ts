@@ -14,7 +14,7 @@ export class ProfileService {
         return this.profileRepository.save(profile)
     }
 
-    async update (id,photo,dn) : Promise<Profile> {
+    async update (id ,photo , dn , lastname , firstname , bio) : Promise<Profile> {
         const profile = await this.profileRepository.findOne(id)
 
 
