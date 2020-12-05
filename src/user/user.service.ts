@@ -38,7 +38,7 @@ export class UserService {
         user.valid = true ;
         user.department = department ;
         user.role = role ;
-        user.profile = await this.profileService.create()
+        //user.profile = await this.profileService.create()
         return this.save(user)
     }
 }
