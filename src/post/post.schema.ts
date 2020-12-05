@@ -3,7 +3,7 @@ import { Comment } from '../comment/comment.schema'
 import { Document, Types } from 'mongoose';
 
 
-@Schema()
+@Schema({ timestamps: true })
 export class Post extends Document {
   @Prop()
   uid: number;
@@ -16,9 +16,6 @@ export class Post extends Document {
 
   @Prop({ type: [{ type: Types.ObjectId, ref: Comment.name }] })
   comments: Comment[];
-
-  @Prop({ type: Date, required: true })
-  time: Date;
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);
