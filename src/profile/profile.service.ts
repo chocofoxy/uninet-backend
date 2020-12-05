@@ -14,4 +14,12 @@ export class ProfileService {
         return this.profileRepository.save(profile)
     }
 
+    async update (id,photo,dn) : Promise<Profile> {
+        const profile = await this.profileRepository.findOne(id)
+
+
+
+        return this.profileRepository.save(profile)
+    }
+
 }

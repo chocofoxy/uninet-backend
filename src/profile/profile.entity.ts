@@ -16,4 +16,9 @@ export class Profile {
     @Column({ nullable: false })
     feed: string;
 
+    @Column()
+    photo: string;
+
+    @Column()
+    dn: Date;
 }

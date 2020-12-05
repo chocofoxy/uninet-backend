@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { FilesInterceptor } from '@nestjs/platform-express/multer/interceptors/files.interceptor';
 import { PostService } from 'src/post/post.service';
 import { HomeService } from './home.service';
+import storage from 'src/storageOptions';
 
 @Controller('home')
 export class HomeController {
@@ -14,12 +16,14 @@ export class HomeController {
 
     //Admin Guard
     @Post('/admin/post')
-    async adminPost(@Param("id") id , @Body('content') content ) {
+    @UseInterceptors(FilesInterceptor('media', 1 , { storage: storage }))
+    async adminPost(@Param("id") id , @Body('content') content , @UploadedFiles() media ) {
         return await this.homeService.PostToTimeline(1 , await this.postService.create(null,content))
     }
 
     @Post('/general/post')
-    async GenralPost(@Param("id") id , @Body('content') content ) {
+    @UseInterceptors(FilesInterceptor('media', 1 , { storage: storage }))
+    async GenralPost(@Param("id") id , @Body('content') content , @UploadedFiles() media) {
         return await this.homeService.PostToTimeline(2 , await this.postService.create(null,content))
     }
 
