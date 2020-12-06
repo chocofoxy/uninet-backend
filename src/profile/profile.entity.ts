@@ -10,7 +10,7 @@ export class Profile {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(type => User , user => user.profile )
+    @OneToOne(() => User , user => user.profile )
     user: User ;
 
     @Column({ nullable: false })

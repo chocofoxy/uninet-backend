@@ -1,6 +1,6 @@
 import { Profile } from 'src/profile/profile.entity';
 import { Rang } from 'src/rang/rang.entity';
-import { ManyToMany, JoinTable, Entity, PrimaryGeneratedColumn, Column , OneToMany, ManyToOne, OneToOne } from 'typeorm';
+import { ManyToMany, JoinTable, Entity, PrimaryGeneratedColumn, Column , OneToMany, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 import { Role } from '../roles/roles.enum'
 
 
@@ -34,7 +34,8 @@ export class User {
     @Column({ default: '-' })
     department: string;
 
-    @OneToOne(type => Profile , profile => profile.user )
+    @OneToOne(() => Profile , profile => profile.user )
+    @JoinColumn()
     profile: Profile ;
 
     /*@OneToMany(type => Profile , profile => profile.user )
