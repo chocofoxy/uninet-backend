@@ -14,11 +14,11 @@ export class ProfileService {
         return this.profileRepository.save(profile)
     }
 
-    async update (id ,photo , dn , lastname , firstname , bio) : Promise<Profile> {
+    async update (id ,photo , dn , bio) : Promise<Profile> {
         const profile = await this.profileRepository.findOne(id)
-
-
-
+        profile.bio = bio
+        profile.dn = dn
+        profile.photo = photo
         return this.profileRepository.save(profile)
     }
 

@@ -21,4 +21,7 @@ export class Profile {
 
     @Column()
     dn: Date;
+
+    @Column()
+    bio: string;
 }

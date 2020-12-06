@@ -36,4 +36,10 @@ export class UserController {
     async pending() {
         return await this.userService.getPending();  
     }
+
+    @Get('/informations')
+    async user( @Req() req ) {
+        let user = await this.userService.findOne(req.user.id);
+        return await this.userService.getInformations(user.id)  
+    }
 }
