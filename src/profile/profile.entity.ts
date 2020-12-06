@@ -24,4 +24,7 @@ export class Profile {
 
     @Column()
     bio: string;
+
+    @Column({ default: false})
+    seted: boolean;
 }

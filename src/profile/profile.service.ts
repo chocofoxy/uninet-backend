@@ -19,6 +19,7 @@ export class ProfileService {
         profile.bio = bio
         profile.dn = dn
         profile.photo = photo
+        profile.seted = true
         return this.profileRepository.save(profile)
     }
 
