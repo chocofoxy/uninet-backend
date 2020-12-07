@@ -13,7 +13,7 @@ export class ProfileService {
     async create() : Promise<Profile> {
         const profile = new Profile()
         const feed = await this.feedService.create()
-        profile.feed = feed._id
+        profile.feed = feed._id.toString()
         return this.profileRepository.save(profile)
     }
 
