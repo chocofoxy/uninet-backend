@@ -2,12 +2,17 @@ import { forwardRef, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { FeedModule } from 'src/feed/feed.module';
 import { PostModule } from 'src/post/post.module';
+import { UserModule } from 'src/user/user.module';
 import { HomeController } from './home.controller';
 import { Home, HomeSchema } from './home.schema';
 import { HomeService } from './home.service';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Home.name, schema: HomeSchema }]),forwardRef(() => FeedModule),forwardRef(() => PostModule)],
+  imports: [MongooseModule.forFeature([{ name: Home.name, schema: HomeSchema }]),
+            forwardRef(() => FeedModule),
+            forwardRef(() => PostModule),
+            forwardRef(() => UserModule)
+          ],
   exports: [HomeService],
   controllers: [HomeController],
   providers: [HomeService]
