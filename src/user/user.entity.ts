@@ -31,6 +31,9 @@ export class User {
     @Column({ default: '-' })
     role: string;
 
+    @Column({ default: false })
+    admin: boolean;
+
     @Column({ default: '-' })
     department: string;
 
