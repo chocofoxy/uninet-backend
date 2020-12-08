@@ -19,7 +19,7 @@ export class ProfileController {
         user.lastname = lastname ? lastname : user.lastname
         user.firstname = firstname ? firstname : user.firstname
         await this.userService.save(user)
-        await this.profileService.update( user.profile , photo[0].pathname , dn , bio )
+        await this.profileService.update( user.profile , /*photo[0].pathname*/ null , dn , bio )
     }
 
 }
