@@ -16,7 +16,7 @@ export class AuthController {
   async login(@Request() req) {
     let user = await this.userService.findOne(req.user.id);
     if ( user )
-    return  { token: this.authService.login(req.user) , user: this.userService.getInformations(user.id) }
+    return  { token: await this.authService.login(req.user) , user: await this.userService.getInformations(user.id) }
   }
 
   @Post('/new')
