@@ -22,4 +22,5 @@ export class ProfileController {
         await this.profileService.update( user.profile , /*photo[0].pathname*/ null , dn , bio )
     }
 
+    
 }

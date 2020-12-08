@@ -12,7 +12,7 @@ export class PostService {
 
     async create(user,text) {
         const post = new this.PostModel({ text: text })
-        /*post.user*/
+        post.user = user
         post.text = text 
         return await post.save() 
     }
@@ -22,11 +22,17 @@ export class PostService {
         post.text = text 
         return await post.save()
     }
-/*
-    async comment(id, comment ) {
+
+    async comment(id, comment) {
         const post = await this.PostModel.findById(id)
-        post.text = text 
+        //post.text = text 
         return await post.save()
     }
-*/
+
+    async delete( id , user ) {
+        const post = await this.PostModel.findById(id)
+        if ( user.id == post.user.id ) {
+            await post.remove()
+        }
+    }
 }

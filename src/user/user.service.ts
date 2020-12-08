@@ -45,4 +45,15 @@ export class UserService {
     getInformations( id ): Promise<User> {
         return this.usersRepository.findOne(id, { relations: ['profile']})
     }
+
+    getUser( id ): Promise<any> {
+        return this.usersRepository.findOne(id, { relations: ['profile']}).then( (user) => {
+            delete user.cin
+            delete user.email
+            if (user.profile)
+            delete user.profile.feed
+            return user
+        })
+    }
+
 }

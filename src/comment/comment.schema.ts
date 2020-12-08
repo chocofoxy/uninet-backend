@@ -9,10 +9,7 @@ export class Comment extends Document {
   uid: number;
 
   @Prop()
-  userId: number;
-
-  @Prop()
-  userName: String;
+  user: any ;
 
   @Prop()
   comment: string

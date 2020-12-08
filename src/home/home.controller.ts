@@ -21,15 +21,18 @@ export class HomeController {
     //Admin Guard
     @Post('/admin/post')
     @UseInterceptors(FilesInterceptor('media', 1 , { storage: storage }))
-    async adminPost(@Param("id") id , @Body('content') content , @UploadedFiles() media ) {
-        return await this.homeService.PostToTimeline(1 , await this.postService.create(null,content))
+    async adminPost(@Param("id") id , @Body('content') content , @UploadedFiles() media , @Req() req ) {
+        const user = await this.userService.findOne(req.user.id)
+        const userObj = this.userService.getUser(user.id)
+        return await this.homeService.PostToTimeline( 1 , await this.postService.create(userObj,content))
     }
 
     @Post('/general/post')
     @UseInterceptors(FilesInterceptor('media', 1 , { storage: storage }))
     async GenralPost(@Param("id") id , @Body('content') content , @UploadedFiles() media , @Req() req ) {
         const user = await this.userService.findOne(req.user.id)
-        return await this.homeService.PostToTimeline(2 , await this.postService.create(null,content) , user.profile.feed)
+        const userObj = this.userService.getUser(user.id)
+        return await this.homeService.PostToTimeline( 2 , await this.postService.create(userObj,content) , user.profile.feed)
     }
 
 }

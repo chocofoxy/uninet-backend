@@ -9,6 +9,9 @@ export class Post extends Document {
   uid: number;
 
   @Prop({ required: false })
+  user: any ;
+
+  @Prop({ required: false })
   text: string;
 
   @Prop({ default: null })
