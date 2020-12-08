@@ -15,7 +15,7 @@ export class AuthController {
   @Post('/login')
   async login(@Request() req) {
     let user = await this.userService.findOne(req.user.id);
-    if ( user && ( user.valid || user.admin) )
+    if ( user )
     return  { token: this.authService.login(req.user) , user: this.userService.getInformations(user.id) }
   }
 
