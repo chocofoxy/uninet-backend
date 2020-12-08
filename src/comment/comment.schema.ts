@@ -15,4 +15,4 @@ export class Comment extends Document {
   comment: string
 }
 
-export const FeedSchema = SchemaFactory.createForClass(Comment);
+export const CommentSchema = SchemaFactory.createForClass(Comment);
