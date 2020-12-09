@@ -25,7 +25,7 @@ export class PostService {
 
     async comment(id, comment) {
         const post = await this.PostModel.findById(id)
-        post.comments.push( comment._id ) 
+        post.comments.push( comment._id )  
         return await post.save()
     }
 

@@ -9,7 +9,8 @@ export class CommentService {
 
     constructor(@InjectModel(Comment.name) private CommentModel: Model<Comment>){}
 
-    create ( user , text ) {
-        const comment = new this.CommentModel({ text: text })
+    async create ( user , text ) {
+        const comment = new this.CommentModel({ text: text , user: user })
+        return await comment.save()
     }
 }
