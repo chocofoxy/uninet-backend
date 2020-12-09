@@ -20,8 +20,8 @@ export class Post extends Document {
   @Prop({ type: [{ type: Types.ObjectId, ref: Comment.name }] })
   comments: Comment[];
 
-  @Prop({ default: 0  })
-  upvotes: number;
+  @Prop({ default: []  })
+  upvotes: any[];
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);

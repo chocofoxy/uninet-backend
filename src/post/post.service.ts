@@ -29,15 +29,17 @@ export class PostService {
         return await post.save()
     }
 
-    async upvote(id) {
+    async upvote(id , userId) {
         const post = await this.PostModel.findById(id)
-        post.upvotes ++
+        if ( !(userId  in post.upvotes) )
+        post.upvotes.push(userId)
         return await post.save()
     }
 
-    async downvote(id) {
+    async downvote(id , userId) {
         const post = await this.PostModel.findById(id)
-        post.upvotes --
+        if ( userId  in post.upvotes )
+        post.upvotes.splice( post.upvotes.indexOf(userId) , 1)
         return await post.save()
     }
 

@@ -34,7 +34,11 @@ export class HomeService {
             model: 'Feed',
             populate: {
                 path: 'posts',
-                model: 'Post'
+                model: 'Post',
+                populate: {
+                    path: 'comments',
+                    model: 'Comment'
+                }
             }
         })
         return timeline

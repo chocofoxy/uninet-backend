@@ -24,13 +24,13 @@ export class PostController {
     @Post('/:id/upvote')
     async upvotePost( @Req() req , @Param('id') id , @Body('text') text ) {
         const user = this.userService.getUser(req.user.id)
-        return await this.postService.upvote(id)
+        return await this.postService.upvote(id,req.user.id)
     }
 
     @Post('/:id/downvote')
     async downvotePost( @Req() req , @Param('id') id) {
         const user = this.userService.getUser(req.user.id)
-        return await this.postService.downvote(id)
+        return await this.postService.downvote(id,req.user.id)
     }
 
 }
