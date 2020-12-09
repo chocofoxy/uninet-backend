@@ -16,4 +16,5 @@ export class Home extends Document {
   feed: Feed;
 }
 
-export const HomeSchema = SchemaFactory.createForClass(Home);
+
+export const HomeSchema = SchemaFactory.createForClass(Home) ;

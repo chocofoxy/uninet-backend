@@ -29,18 +29,7 @@ export class HomeService {
     }
 
     async geTimeline(id: number) {
-        let timeline = await this.homeModel.findOne({ uid: id }).populate({ 
-            path: 'feed',
-            model: 'Feed',
-            populate: {
-                path: 'posts',
-                model: 'Post',
-                populate: {
-                    path: 'comments',
-                    model: 'Comment'
-                }
-            }
-        })
+        let timeline = await this.homeModel.findOne({ uid: id })
         return timeline
     }
 

@@ -30,7 +30,12 @@ import { CommentModule } from './comment/comment.module';
     ProfileModule,
     MongooseModule.forRoot(
       'mongodb+srv://root:root@cluster0.bvyxh.mongodb.net/uninet?retryWrites=true&w=majority', 
-    ),
+        {
+        connectionFactory: (connection) => {
+          connection.plugin(require('mongoose-autopopulate'));
+          return connection;
+        }
+      }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
