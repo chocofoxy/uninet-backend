@@ -16,6 +16,7 @@ export class ProfileController {
     @UseInterceptors(FilesInterceptor('photo', 1 , { storage: storage }))
     async update( @Body('dn') dn , @UploadedFiles() photo , @Body('lastname') lastname , @Body('firstname') firstname , @Body('bio') bio , @Req() req ) {
         let user = await this.userService.findOne(req.user.id)
+        console.log(user.lastname);
         user.lastname = lastname ? lastname : user.lastname
         user.firstname = firstname ? firstname : user.firstname
         await this.userService.save(user)
