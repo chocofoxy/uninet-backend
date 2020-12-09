@@ -10,7 +10,7 @@ export class UserService {
     constructor(@InjectRepository(User) private usersRepository: Repository<User>, private profileService: ProfileService) {}
 
     findAll(): Promise<User[]> {
-        return this.usersRepository.find({ relations: [] });
+        return this.usersRepository.find({ where: { admin: false } , relations: [] });
     }
 
     findOne(id: string): Promise<User> {
