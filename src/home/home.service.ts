@@ -17,7 +17,7 @@ export class HomeService {
       }
 
     async initTimelines() {
-        //this.homeModel.collection.drop();
+        this.homeModel.collection.drop();
         const generalTimeline = new this.homeModel();
         const adminTimeline = new this.homeModel();
         generalTimeline.uid = 1;
