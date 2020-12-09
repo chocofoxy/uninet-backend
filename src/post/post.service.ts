@@ -31,8 +31,8 @@ export class PostService {
 
     async delete( id , user ) {
         const post = await this.PostModel.findById(id)
-        if ( user.id == post.user.id ) {
+        //if ( user.id == post.user.id ) {
             await post.remove()
-        }
+        //}
     }
 }
