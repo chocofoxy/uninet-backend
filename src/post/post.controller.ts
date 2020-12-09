@@ -18,6 +18,7 @@ export class PostController {
     @Post('/:id/comment')
     async commentOnPost( @Req() req , @Param('id') id , @Body('text') text ) {
         const user = this.userService.getUser(req.user.id)
+        console.log(text);
         return await this.postService.comment(id , await this.commentService.create( user , text )) 
     }
 
