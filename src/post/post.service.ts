@@ -25,7 +25,19 @@ export class PostService {
 
     async comment(id, comment) {
         const post = await this.PostModel.findById(id)
-        //post.text = text 
+        post.comments.push( comment._id ) 
+        return await post.save()
+    }
+
+    async upvote() {
+        const post = await this.PostModel.findById(id)
+        post.upvotes ++
+        return await post.save()
+    }
+
+    async downvote() {
+        const post = await this.PostModel.findById(id)
+        post.upvotes --
         return await post.save()
     }
 
