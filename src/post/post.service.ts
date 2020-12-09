@@ -29,13 +29,13 @@ export class PostService {
         return await post.save()
     }
 
-    async upvote() {
+    async upvote(id) {
         const post = await this.PostModel.findById(id)
         post.upvotes ++
         return await post.save()
     }
 
-    async downvote() {
+    async downvote(id) {
         const post = await this.PostModel.findById(id)
         post.upvotes --
         return await post.save()
