@@ -11,7 +11,7 @@ export class Feed extends Document {
   @Prop({ default: 0 })
   count: number;
 
-  @Prop({ type: [{ type: Types.ObjectId, ref: Post.name }] })
+  @Prop({ type: [{ type: Types.ObjectId, ref: Post.name, autopopulate: true  }] })
   posts: Post[];
 }
 

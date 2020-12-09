@@ -12,7 +12,7 @@ export class Home extends Document {
   @Prop({ default: 0 })
   name: string;
 
-  @Prop({ type: Types.ObjectId, ref: Feed.name })
+  @Prop({ type: Types.ObjectId, ref: Feed.name, autopopulate: true })
   feed: Feed;
 }
 

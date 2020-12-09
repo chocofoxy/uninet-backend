@@ -17,7 +17,7 @@ export class Post extends Document {
   @Prop({ default: null })
   media: string;
 
-  @Prop({ type: [{ type: Types.ObjectId, ref: Comment.name }] })
+  @Prop({ type: [{ type: Types.ObjectId, ref: Comment.name ,autopopulate: true  }] })
   comments: Comment[];
 
   @Prop({ default: []  })
