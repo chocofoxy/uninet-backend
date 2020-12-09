@@ -43,7 +43,7 @@ export class HomeService {
     async PostToTimeline( id , post , userFeed = null) {
         const timeline = await this.geTimeline(id)   
         await this.feedService.addPost(timeline.feed._id,post)
-        if ( userFeed )
-        await this.feedService.addPost(userFeed,post)
+        /*if ( userFeed )
+        await this.feedService.addPost(userFeed,post)*/
     }
 }
