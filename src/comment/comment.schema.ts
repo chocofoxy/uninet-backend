@@ -3,7 +3,7 @@ import { Document, Types } from 'mongoose';
 import { Post } from 'src/post/post.schema';
 
 
-@Schema()
+@Schema({ timestamps: true  , strict: false })
 export class Comment extends Document {
   @Prop()
   uid: number;
