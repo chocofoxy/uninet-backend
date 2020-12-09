@@ -11,6 +11,8 @@ export class CommentService {
 
     async create ( user , text ) {
         const comment = new this.CommentModel({ comment: text , user: user })
+        comment.comment = text 
+        comment.user = user
         return await comment.save()
     }
 }
