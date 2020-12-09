@@ -31,7 +31,7 @@ export class HomeController {
     @UseInterceptors(FilesInterceptor('media', 1 , { storage: storage }))
     async GenralPost(@Param("id") id , @Body('content') content , @UploadedFiles() media , @Req() req ) {
         const user = await this.userService.getInformations(req.user.id)
-        const userObj = this.userService.getUser(user.id)
+        const userObj = await this.userService.getUser(user.id)
         return await this.homeService.PostToTimeline( 2 , await this.postService.create(userObj,content) , user.profile.feed )
     }
 
