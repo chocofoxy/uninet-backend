@@ -8,8 +8,8 @@ export class Post extends Document {
   @Prop()
   uid: number;
 
-  @Prop({ required: false })
-  user: {} ;
+  @Prop({ required: false , any: {} })
+  user: any ;
 
   @Prop({ required: false })
   text: string;
