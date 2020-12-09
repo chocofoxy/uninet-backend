@@ -32,12 +32,13 @@ export class HomeService {
         let timeline = await this.homeModel.findOne({ uid: id }).populate({ 
             path: 'feed',
             model: 'Feed',
-        }).populate({
-            path: 'posts',
-            model: 'Post',
             populate: {
-                path: 'comments',
-                model: 'Comment'
+                path: 'posts',
+                model: 'Post',
+                populate: {
+                    path: 'comments',
+                    model: 'Comment'
+                }
             }
         })
         return timeline
