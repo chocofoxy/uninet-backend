@@ -11,7 +11,7 @@ export class PostService {
     }
 
     async create(user,text) {
-        const post = new this.PostModel({ text: text })
+        const post = new this.PostModel({ text: text , user: user })
         post.user = user
         post.text = text 
         return await post.save() 
