@@ -8,7 +8,7 @@ export class Comment extends Document {
   @Prop()
   uid: number;
 
-  @Prop({ required: false , any: {} })
+  @Prop({ required: true , any: {} })
   user: any ;
 
   @Prop()
