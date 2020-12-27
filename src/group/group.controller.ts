@@ -25,6 +25,12 @@ export class GroupController {
     return { populated: await this.groupService.findAll(req.user.userId) , raw: await this.groupService.findAllRaw(req.user.userId) };
   }
 
+  @Role('Admin')
+  @Get('/all')
+  All(@Req() req) {
+    return this.groupService.all() ;
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.groupService.findOne(id);

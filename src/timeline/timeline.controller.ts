@@ -1,4 +1,5 @@
 import { Controller, Get, Req } from '@nestjs/common';
+import { Role } from 'src/roles/role.decorator';
 import { TimelineService } from './timeline.service';
 
 @Controller('timeline')
@@ -18,6 +19,12 @@ export class TimelineController {
   @Get('administration')
   administration() {
     return this.timelineService.getTimeline(1);
+  }
+
+  @Role('Admin')
+  @Get('reported')
+  reported() {
+    return this.timelineService.getTimeline(3);
   }
 
 }

@@ -42,7 +42,7 @@ export class PostController {
 
   @Delete(':id')
   remove(@Param('id') id: string , @Req() req ) {
-    return this.postService.remove(req.user.userId ,id);
+    return this.postService.remove(req.user ,id);
   }
 
   @Post(':id/upvote')
@@ -68,6 +68,12 @@ export class PostController {
   @Post('/:id/report')
   report( @Param('id') id: string ) {
     return this.postService.report(id)
+  }
+
+  @Role("Admin")
+  @Post('/:id/ignore')
+  ignore( @Param('id') id: string ) {
+    return this.postService.ignore(id)
   }
 
 

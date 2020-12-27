@@ -41,6 +41,10 @@ export class GroupService {
     return this.GroupModel.find({ user: id }).populate('class')
   }
 
+  all() {
+    return this.GroupModel.find().populate('class') 
+  }
+
   async findAllRaw(id) {
     const groups = await this.GroupModel.find({ user: id })
     return  groups.map( group => group._id )

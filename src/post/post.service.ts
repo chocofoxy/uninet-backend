@@ -11,6 +11,7 @@ import { Comment } from './entities/comment.schema';
 import { Notification } from 'rxjs';
 import { NotificationGateway } from 'src/notification/notification.gateway';
 import { NotificationService } from 'src/notification/notification.service';
+import { Role } from 'src/roles/role.decorator';
 
 @Injectable()
 export class PostService {
@@ -41,9 +42,9 @@ export class PostService {
     return `This action updates a #${id} post`;
   }
 
-  async remove(userid , id) {
+  async remove(user , id) {
     const post = await this.PostModel.findById(id)
-    if ( post.user._id == userid )
+    if ( post.user._id == user.userId || user.role == "Admin")
     return await post.delete()
   }
 
@@ -107,9 +108,17 @@ export class PostService {
   }
 
   async report(id) {
-    const reportFeed = await this.feedService.findOne( await this.timelineService.getTimeline(3) )
-    if (! (id in reportFeed.posts) )
+    const reportFeed = await this.feedService.findOne( (await this.timelineService.getTimeline(3)).feed._id )
+    if (! (id in reportFeed.posts) ) {
       reportFeed.posts.push( await this.findOne(id) )
+      await reportFeed.save()
+    }
+  }
+
+  async ignore(id) {
+    const reportFeed = await this.feedService.findOne( (await this.timelineService.getTimeline(3)).feed._id )
+    reportFeed.posts.splice( id  , 1)
+    return await reportFeed.save()
   }
 
 
