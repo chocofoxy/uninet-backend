@@ -7,7 +7,6 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import storage from 'src/storageOptions';
 
 
-@UseGuards(AuthGuard('jwt'))
 @Controller('post')
 export class PostController {
   constructor(private readonly postService: PostService) {}

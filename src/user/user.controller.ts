@@ -3,11 +3,9 @@ import { UserService } from './user.service';
 import { UpdateProfile } from './dto/update-user.dto';
 import storage from 'src/storageOptions';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { UploadedFile } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Role } from 'src/roles/role.decorator';
 
 
-@UseGuards(AuthGuard('jwt'))
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}

@@ -1,11 +1,7 @@
 import { Controller, Get, Post, Body, Put, Param, Delete, UseGuards } from '@nestjs/common';
 import { RangService } from './rang.service';
 import { CreateRangDto } from './dto/create-rang.dto';
-import { UpdateRangDto } from './dto/update-rang.dto';
-import { AuthGuard } from '@nestjs/passport';
 
-
-@UseGuards(AuthGuard('jwt'))
 @Controller('rang')
 export class RangController {
   constructor(private readonly rangService: RangService) {}

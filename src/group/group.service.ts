@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { FeedService } from 'src/feed/feed.service';
 import { PostService } from 'src/post/post.service';
 import { RangService } from 'src/rang/rang.service';
-import { UserRole } from 'src/user/entities/roles';
+import { UserRole } from 'src/roles/roles';
 import { UserService } from 'src/user/user.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';

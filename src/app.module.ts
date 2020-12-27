@@ -13,6 +13,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { SaveModule } from './save/save.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RoleGuard } from './roles/role.guard';
+import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from './roles/jwt-auth.guard';
 
 @Module({
   imports: [UserModule, NotificationModule, PostModule, AuthModule, FeedModule, TimelineModule, GroupModule, RangModule,
@@ -30,6 +34,14 @@ import { SaveModule } from './save/save.module';
     SaveModule,
   ],
   controllers: [AppController],
-  providers: [AppService,NotificationModule],
+  providers: [AppService,NotificationModule,
+  {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard ,
+  },
+  {
+    provide: APP_GUARD,
+    useClass: RoleGuard,
+  }],
 })
 export class AppModule {}

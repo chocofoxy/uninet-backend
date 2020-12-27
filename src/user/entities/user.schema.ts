@@ -3,8 +3,8 @@ import { Document, Types } from 'mongoose';
 import { Profile } from './profile.schema';
 import { Notification } from 'src/notification/entities/notification.schema';
 import { Rang } from 'src/rang/entities/rang.schema';
-import { UserRole } from './roles';
 import { Save } from 'src/save/entities/save.entity';
+import { UserRole } from 'src/roles/roles';
 
 
 @Schema({ timestamps: true  , strict: false })
