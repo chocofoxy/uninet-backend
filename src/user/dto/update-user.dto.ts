@@ -16,7 +16,6 @@ export class UpdateProfile {
     dn: Date
 
     @ApiProperty()
-    @Length(20,500)
     bio: string
 
 }

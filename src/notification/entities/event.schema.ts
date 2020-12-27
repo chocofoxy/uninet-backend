@@ -12,7 +12,7 @@ export class Event extends Document {
   @Prop()
   post: string ;
 
-  @Prop({ type: Types.ObjectId, ref: 'User' , autopopulate: false })
+  @Prop({ type: Types.ObjectId, ref: 'User' , autopopulate: true })
   user: User;
 
   @Prop()

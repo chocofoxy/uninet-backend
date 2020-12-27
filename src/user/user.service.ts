@@ -44,14 +44,14 @@ export class UserService {
 
   }
 
-  async update(id, updateUserDto: UpdateProfile , media = [] ) {
+  async update(id, updateUserDto: UpdateProfile , media ) {
     const user = await this.UserModel.findById(id)
     user.firstname = updateUserDto.firstname || user.firstname
     user.lastname = updateUserDto.lastname || user.lastname
     const profile = await this.ProfileModel.findById(user.profile._id)
     profile.dn = updateUserDto.dn
     profile.bio = updateUserDto.bio
-    profile.photo = media
+    profile.photo = media || profile.photo
     profile.seted = true 
     await profile.save()
     return await user.save()

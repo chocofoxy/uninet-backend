@@ -27,6 +27,7 @@ export class NotificationGateway implements OnGatewayConnection {
       if (user) {
         client.join(user._id)
         this.logger.log(`\x1b[36mWebsocket ${client.id} \x1b[32m User: ${user._id} ${user.firstname.toUpperCase()} ${user.lastname.toUpperCase()}`);
+        client.join(user._id).emit('GetNotifications',user.notification)
       } else {
         client.disconnect();
       }
@@ -45,7 +46,7 @@ export class NotificationGateway implements OnGatewayConnection {
 
   async onNotifcation( user , event: Event) {
     await this.notificationService.notify(user.notification._id,event)
-    
+    this.server.to(user._id).emit('NotificationAlert', event );
   }
 
   @SubscribeMessage('JoinPost')
@@ -53,7 +54,6 @@ export class NotificationGateway implements OnGatewayConnection {
     client.join(post.id)
   }
 
-  
   async updatePost( id: any, post: any) {  
     this.server.to(id).emit('PostChanged', post );
   }

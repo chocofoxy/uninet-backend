@@ -79,7 +79,7 @@ export class PostService {
     if ( !post.upvotes.includes(id) ) {          
         post.upvotes.push(id)
         if ( post.user.role != "Admin" )
-        this.notifications.onNotifcation(post.user , await this.notificationService.event(id,post._id, "upvote on one of your posts") )
+        this.notifications.onNotifcation(post.user , await this.notificationService.event(id,post._id, "upvoted on one of your posts") )
      }
     this.notifications.updatePost( post._id , post)
     return await post.save()
