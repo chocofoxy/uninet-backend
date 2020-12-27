@@ -1,6 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, UseGuards, Req } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { Role } from 'src/roles/role.decorator';
+import { Controller, Get, Req } from '@nestjs/common';
 import { TimelineService } from './timeline.service';
 
 @Controller('timeline')

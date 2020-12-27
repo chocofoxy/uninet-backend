@@ -78,6 +78,7 @@ export class PostService {
     const post = await this.PostModel.findById(postId)
     if ( !post.upvotes.includes(id) ) {          
         post.upvotes.push(id)
+        if ( post.user.role != "Admin" )
         this.notifications.onNotifcation(post.user , await this.notificationService.event(id,post._id, "upvote on one of your posts") )
      }
     this.notifications.updatePost( post._id , post)
@@ -89,8 +90,10 @@ export class PostService {
     post.comments.push(await (new this.CommentModel({ user: id , content: content})).save())
     await post.save()
     this.notifications.updatePost( post._id , post)
+    if ( post.user.role != "Admin" )
     this.notifications.onNotifcation(post.user , await this.notificationService.event(id,post._id, "commented on one of your posts") )
   }
+
 
   async deleteComment(id, commentId) {
     const comment = await this.CommentModel.findById(commentId)

@@ -82,7 +82,7 @@ export class UserService {
   }
 
   async pending() {
-    return await this.UserModel.find({ valid: false })
+    return await this.UserModel.find({ valid: false , role: { $ne: 'Admin' } })
   }
 
   async createProfile() {
