@@ -14,7 +14,6 @@ export class TimelineController {
 
   @Get('general')
   general(@Req() req ){
-    console.log(req.user);  
     return this.timelineService.getTimeline(2);
   }
 

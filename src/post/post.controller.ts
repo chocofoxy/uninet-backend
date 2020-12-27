@@ -5,6 +5,7 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import storage from 'src/storageOptions';
+import { Role } from 'src/roles/role.decorator';
 
 
 @Controller('post')
@@ -17,6 +18,7 @@ export class PostController {
     await this.postService.postGeneral(req.user.userId ,content,files);
   }
 
+  @Role('Admin')
   @Post("admin")
   @UseInterceptors(FilesInterceptor('media', 3 , { storage: storage }))
   async postToAdmin(@Body('content') content  , @Req() req  ,  @UploadedFiles() files ) {

@@ -7,12 +7,14 @@ import { PostService } from 'src/post/post.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import storage from 'src/storageOptions';
 import { UploadedFiles } from '@nestjs/common';
+import { Role } from 'src/roles/role.decorator';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('group')
 export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
+  @Role('Teacher')
   @Post()
   create(@Body() createGroupDto: CreateGroupDto, @Req() req ) {
     return this.groupService.create(req.user.userId , createGroupDto);
@@ -28,6 +30,7 @@ export class GroupController {
     return this.groupService.findOne(id);
   }
 
+  @Role('Teacher')
   @Delete(':id')
   remove(@Param('id') id: string , @Req() req ) {
     return this.groupService.remove(req.user.id , id);

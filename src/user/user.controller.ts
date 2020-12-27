@@ -25,6 +25,7 @@ export class UserController {
     return this.userService.getInformations(req.user.userId);
   }
 
+  @Role('Admin')
   @Post(':id/activate')
   activate(@Param('id') id: string, @Body("class") classId, @Body("role") role ) {
     return this.userService.validate(id,classId,role)
@@ -33,16 +34,17 @@ export class UserController {
   @Put()
   @UseInterceptors(FilesInterceptor('photo', 1 , { storage: storage }))
   update(@Req() req, @Body() updateUserDto: UpdateProfile, @UploadedFiles() files) {
-    console.log(files)
     return this.userService.update(req.user.userId, updateUserDto, files );
 
   }
 
+  @Role('Admin')
   @Get('pending')
   pending() {
     return this.userService.pending();
   }
 
+  @Role('Admin')
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.userService.remove(id);

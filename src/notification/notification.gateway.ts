@@ -3,6 +3,7 @@ import { NotificationService } from './notification.service';
 import { AuthService } from 'src/auth/auth.service';
 import { Event } from './entities/event.schema';
 import { Server } from 'socket.io';
+import { Logger } from '@nestjs/common';
 
 @WebSocketGateway({ transports: ['websocket','polling'] , cors: {
   methods: ["GET", "POST"],
@@ -12,6 +13,8 @@ export class NotificationGateway implements OnGatewayConnection {
 
   @WebSocketServer()
   server: Server;
+
+  logger: Logger = new Logger('Request');
 
   constructor(
     private readonly notificationService: NotificationService ,
@@ -23,7 +26,7 @@ export class NotificationGateway implements OnGatewayConnection {
       const user = await this.authservice.verify(client.handshake.query.token);
       if (user) {
         client.join(user._id)
-        console.log(user.firstname);
+        this.logger.log(`\x1b[36mWebsocket ${client.id} \x1b[32m User: ${user._id} ${user.firstname.toUpperCase()} ${user.lastname.toUpperCase()}`);
       } else {
         client.disconnect();
       }
@@ -47,7 +50,6 @@ export class NotificationGateway implements OnGatewayConnection {
 
   @SubscribeMessage('JoinPost')
   async JoinPost(client: any, post: any) {  
-    console.log(post)  
     client.join(post.id)
   }
 

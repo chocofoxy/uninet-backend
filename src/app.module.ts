@@ -15,7 +15,6 @@ import { join } from 'path';
 import { SaveModule } from './save/save.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RoleGuard } from './roles/role.guard';
-import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from './roles/jwt-auth.guard';
 
 @Module({
