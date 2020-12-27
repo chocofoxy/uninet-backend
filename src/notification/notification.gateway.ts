@@ -58,4 +58,7 @@ export class NotificationGateway implements OnGatewayConnection {
     this.server.to(id).emit('PostChanged', post );
   }
 
+  broadcast( user ,  postId , message ) {
+    this.server.emit('NotificationAlert', { post: postId , message: message , user: user } )
+  }
 }

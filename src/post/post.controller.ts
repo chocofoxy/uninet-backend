@@ -60,9 +60,9 @@ export class PostController {
     return await this.postService.comment(req.user.userId, comment, id)
   }
 
-  @Delete('comment/:id')
-  async deleteComment(@Param('id') id: string , @Req() req ) {
-    return await this.postService.deleteComment(req.user.userId, id)
+  @Delete(':postId/comment/:id')
+  async deleteComment(@Param('id') id: string , @Req() req , @Param('postId') postId: string) {
+    return await this.postService.deleteComment(req.user.userId, id,postId)
   }
 
   @Post('/:id/report')

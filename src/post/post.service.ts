@@ -60,8 +60,9 @@ export class PostService {
 
   async postAdmin( id , content , media = []) {
     const post = await this.create(id,content,media)
+    const user = await this.userService.findOne(id)
     const adminFeed = await this.feedService.findOne( (await this.timelineService.getTimeline(1)).feed._id )
-    this.notifications.onNotifcation(post.user , await this.notificationService.event(id,post._id, "the adminstration posted a new content") )
+    this.notifications.broadcast(user, post._id,"publishied a new post")
     adminFeed.posts.push(post._id)
     await adminFeed.save()
   }
@@ -95,10 +96,14 @@ export class PostService {
   }
 
 
-  async deleteComment(id, commentId) {
+  async deleteComment(id, commentId, postId ) {
     const comment = await this.CommentModel.findById(commentId)
-    if ( comment.user._id == id )
-    await comment.delete()
+    const post = await this.PostModel.findById(postId)
+    if ( comment.user._id == id ) {
+      await comment.delete()
+      const post = await this.PostModel.findById(postId)
+      this.notifications.updatePost( post._id , post)
+    }
   }
 
   async report(id) {
