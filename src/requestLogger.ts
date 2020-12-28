@@ -6,6 +6,7 @@ export function useRequestLogging(app) {
     app.use(
         morgan(function (tokens, req, res) {
             return [
+              req.user.email || 'Anonymous',
               tokens.method(req, res),
               tokens.url(req, res),
               "\x1b[37m" + tokens.status(req, res),

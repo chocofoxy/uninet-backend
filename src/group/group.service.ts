@@ -56,10 +56,11 @@ export class GroupService {
 
   async remove( userId , id) {
     const group = await this.findOne(id)
-    if ( userId == group.user._id )
-      return this.GroupModel.findByIdAndRemove(id)
-    else
+    if ( userId == group.user._id ){
+      return await group.remove()
+     } else {
       return new Error(" You are not the owner of this group ")
+    }
   } 
 
   async postGroup( id , groupId , content , media = []) {

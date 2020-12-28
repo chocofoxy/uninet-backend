@@ -38,8 +38,8 @@ export class GroupController {
 
   @Role('Teacher')
   @Delete(':id')
-  remove(@Param('id') id: string , @Req() req ) {
-    return this.groupService.remove(req.user.id , id);
+  async remove(@Param('id') id: string , @Req() req ) {
+    return await this.groupService.remove(req.user.userId , id);
   }
 
   @Post("/:id/post")
