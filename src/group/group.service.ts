@@ -65,10 +65,16 @@ export class GroupService {
 
   async postGroup( id , groupId , content , media = []) {
     const user = await this.userService.findOne(id)
-    const rang = await this.classService.findOneRaw(user.class._id)
-    if ( rang.groups.includes(groupId) ) {
-    const post = await this.postService.create(id,content,media)
+    let canPost = false
+    if ( user.role == "Student" ) {
+      const rang = await this.classService.findOneRaw(user.class._id)
+      canPost = rang.groups.includes(groupId)
+    }
+    
     const group = await this.findOne(groupId)
+
+    if ( canPost || ( id == group.user._id ) ) {
+    const post = await this.postService.create(id,content,media)
     const groupFeed = await this.feedService.findOne( group.feed._id )
     groupFeed.posts.push(post._id)
     await groupFeed.save() }

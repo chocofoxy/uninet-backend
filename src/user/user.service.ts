@@ -10,6 +10,7 @@ import { User } from './entities/user.schema';
 import * as bcrypt from 'bcrypt';
 import { RangService } from 'src/rang/rang.service';
 import { SaveService } from 'src/save/save.service';
+import { UserRole } from 'src/roles/roles';
 
 @Injectable()
 export class UserService {
@@ -21,7 +22,24 @@ export class UserService {
     private feedService: FeedService,
     private rangService: RangService,
     private notificationService: NotificationService
-  ) {}
+  ) {
+    this.init()
+  }
+
+  async init() {
+    const users = await this.UserModel.countDocuments() == 0
+    if (users) { 
+      await ( new this.UserModel({ 
+        firstname: 'uninet' , 
+        lastname: 'admin' , 
+        cin: '00000000' , 
+        valid: true,
+        role: UserRole.Admin ,
+        password: await bcrypt.hash('00000000', 10) ,
+        email: 'admin@gmail.com'
+      })).save()
+    }
+  }
 
   async create(createUserDto: CreateUserDto) {
     createUserDto.password = await bcrypt.hash(createUserDto.password, 10)
@@ -70,7 +88,7 @@ export class UserService {
     const rang = await this.rangService.findOne(classId)
     user.profile = await this.createProfile()
     if ( rang ) {
-      user.class = rang
+      user.class = rang._id
       rang.students.push(user)
       await rang.save()
     }

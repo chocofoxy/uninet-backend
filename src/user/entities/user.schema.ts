@@ -30,7 +30,7 @@ export class User extends Document {
   @Prop({ type: Types.ObjectId, ref: Notification.name , autopopulate: true })
   notification: Notification ;
 
-  @Prop({ type: Types.ObjectId, ref: Rang.name , autopopulate: false })
+  @Prop({ type: Types.ObjectId, ref: Rang.name , autopopulate: true })
   class: Rang ;
 
   @Prop({ type: Types.ObjectId, ref: Save.name , autopopulate: false })
